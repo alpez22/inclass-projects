@@ -1,0 +1,14 @@
+Total Number of Words: 12
+Total Unique Words: 11
+
+Word: Festerling, Freq: 1, Initial Position: 6
+Word: Flogel, Freq: 1, Initial Position: 2
+Word: Kondakova, Freq: 1, Initial Position: 9
+Word: Laitinen, Freq: 1, Initial Position: 10
+Word: Lex, Freq: 2, Initial Position: 0
+Word: Lucas, Freq: 1, Initial Position: 7
+Word: Pezza, Freq: 1, Initial Position: 11
+Word: Rietz, Freq: 1, Initial Position: 4
+Word: Scalzo, Freq: 1, Initial Position: 1
+Word: Schultz, Freq: 1, Initial Position: 5
+Word: Zhang, Freq: 1, Initial Position: 3

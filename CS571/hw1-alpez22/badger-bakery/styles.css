@@ -1,0 +1,25 @@
+table, th, td {
+  border: 1px solid;
+}
+
+.large-text-wrap {
+  inline-size: 600px; 
+}
+
+.third-header{
+  margin-bottom: -10;
+}
+
+.primary-button {
+  background-color: #86fc56;
+  border: 20cap;
+  border-radius: 15px;
+  padding: 10pt;
+}
+
+.secondary-button {
+  background-color: bisque;
+  border: 20cap;
+  border-radius: 15px;
+  padding: 8pt;
+}

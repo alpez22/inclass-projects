@@ -1,0 +1,74 @@
+import java.util.*;
+
+public class InverseCounting{
+    static int count = 0;
+    public static int[] CountandMerge(int[] leftArray, int[] rightArray){
+        int[] mergedArray = new int[leftArray.length + rightArray.length];
+        int leftIndex = 0;
+        int rightIndex = 0;
+        int mergeIndex = 0;
+        while(leftIndex < leftArray.length && rightIndex < rightArray.length){
+            if(leftArray[leftIndex] <= rightArray[rightIndex]){
+                mergedArray[mergeIndex] = leftArray[leftIndex];
+                mergeIndex++;
+                leftIndex++;
+            }else{
+                count += leftArray.length - leftIndex;
+                mergedArray[mergeIndex] = rightArray[rightIndex];
+                mergeIndex++;
+                rightIndex++;
+            }
+        }
+        while(leftIndex < leftArray.length){
+            mergedArray[mergeIndex] = leftArray[leftIndex];
+            mergeIndex++;
+            leftIndex++;
+        }
+        while(rightIndex < rightArray.length){
+            count += leftArray.length - leftIndex;
+            mergedArray[mergeIndex] = rightArray[rightIndex];
+            mergeIndex++;
+            rightIndex++;
+        }
+
+        return mergedArray;
+    }
+    public static int[] MergeSort(int[] array, int start, int end){
+        
+        //base case
+        if(start < end){
+        
+            int middle = (start + end)/2;
+            //count the inverses from the 2 halves
+            int[] leftArray = MergeSort(array, start, middle);
+            int[] rightArray = MergeSort(array, middle+1, end);
+
+            //merge the 2 halfs and count inverses on this larger array
+            return CountandMerge(leftArray, rightArray);
+        }
+        return new int[] {array[start]}; //can do this cuz start >= end so there will only be 1 value and start would be default
+    }
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int instances = sc.nextInt();
+
+        int[] answers = new int[instances];
+
+        for(int i = 0; i < instances; i++){
+            int numElements = sc.nextInt();
+
+            int[] array = new int[numElements];
+            for(int j = 0; j < temp.length; j++){
+                array[j] = sc.nextInt();
+            }
+
+            MergeSort(array, 0, numElements - 1);
+            answers[i] = count;
+            count = 0;
+        }
+
+        for(int k = 0; k < instances; k++){
+            System.out.println(answers[k]);
+        }
+    }
+}

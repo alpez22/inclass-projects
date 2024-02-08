@@ -1,0 +1,1 @@
+CS577 - Introduction to Algorithms is an advanced computer science course at UW-Madison under the theoretical computer science umbrella. Within this folder I have several coding projects in Java that I completed individually. I completed this course with an A and I scored top 20 out of 435 students on the final exam.

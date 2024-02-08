@@ -1,0 +1,1 @@
+CS354 - Machine Organization and Programming is a basic computer science course at UW-Madison. Within this folder I have several coding projects in C that I completed individually.

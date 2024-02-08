@@ -1,0 +1,1 @@
+CS300 - Programming 2 is a basic computer science course at UW-Madison. Within this folder I have several coding projects in Java that I completed individually.
