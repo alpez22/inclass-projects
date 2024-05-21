@@ -42,20 +42,25 @@ void kv_store_put(key_type key, value_type value) {
     pthread_mutex_lock(&kv_store_instance->locks[index]); //lock the relevant bucket
 
     kv_node_t** head = &kv_store_instance->buckets[index];
-    while (*head != NULL && (*head)->key != key) {
+    while (*head != NULL) {
     	//printf("HELLO\n");
+    	if((*head)->key == key){
+    		(*head)->value = value;
+    	 	pthread_mutex_unlock(&kv_store_instance->locks[index]); //unlock the bucket
+    	 	return;
+    	}
         head = &(*head)->next;
     }
 
-    if (*head == NULL) { //key not found, insert new
+    //if (*head == NULL) { //key not found, insert new
     	//printf("HELLO\n");
         *head = malloc(sizeof(kv_node_t));
         (*head)->key = key;
         (*head)->value = value;
         (*head)->next = NULL;
-    } else { //key found, update value
+   /* } else { //key found, update value
         (*head)->value = value;
-    }
+    }*/
 
     pthread_mutex_unlock(&kv_store_instance->locks[index]); //unlock the bucket
 }
@@ -70,11 +75,16 @@ value_type kv_store_get(key_type key) {
     pthread_mutex_lock(&kv_store_instance->locks[index]); //lock the relevant bucket
 
     kv_node_t* head = kv_store_instance->buckets[index];
-    while (head != NULL && head->key != key) {
+    while (head != NULL) {
+    	if(head->key == key){
+       		value_type value = head->value;
+       	 	pthread_mutex_unlock(&kv_store_instance->locks[index]); //unlock the bucket
+       	 	return value;
+       	}
         head = head->next;
     }
 
-    value_type value = (head == NULL) ? 0 : head->value; //assuming 0 is an invalid value
+    value_type value = 0; //(head == NULL) ? 0 : head->value; // 0 is an invalid value
 
     pthread_mutex_unlock(&kv_store_instance->locks[index]); //unlock the bucket.
 
@@ -103,7 +113,7 @@ void kv_store_destroy() {
 
 void *server_thread(void *arg){
 	while(1){
-		//printf("HELLO\n");
+		printf("HELLO\n");
 		//printf("HELLKSDJFLKSJDLFKJSDF\n");
 		struct buffer_descriptor *bd = malloc(sizeof(struct buffer_descriptor *));
 		//printf("HELLKSDJFLKSJDLFKJSDF\n");
@@ -113,20 +123,25 @@ void *server_thread(void *arg){
 		if(bd->req_type == PUT){
 			//printf("HELLO\n");
 			kv_store_put(bd->k, bd->v);
-			char *temp_window = shmem_area + bd->res_off;
-			struct buffer_descriptor *ready_window = (struct buffer_descriptor*)temp_window;
-			ready_window->ready = 1;
+			struct buffer_descriptor *temp_window =(struct buffer_descriptor*)(void *)( shmem_area + bd->res_off);
+			//struct buffer_descriptor *ready_window = malloc(sizeof(struct buffer_descriptor *));
+			memcpy(temp_window, bd, sizeof(struct buffer_descriptor));
+			//(struct buffer_descriptor*)temp_window;
+			((struct buffer_descriptor *)temp_window)->ready = 1;
 			//printf("HELLO\n");
 		}
 		else{
 			//printf("HELLO\n");
 			int value = kv_store_get(bd->k);
-			char *temp_window = shmem_area + bd->res_off;
-			struct buffer_descriptor *ready_window = (struct buffer_descriptor*)temp_window;
-			ready_window->v = value;
-			ready_window->ready = 1;
+			struct buffer_descriptor *temp_window = (struct buffer_descriptor*)(void *)( shmem_area + bd->res_off);;
+			//struct buffer_descriptor *ready_window = malloc(sizeof(struct buffer_descriptor *));
+			memcpy(temp_window, bd, sizeof(struct buffer_descriptor));
+			//(struct buffer_descriptor*)temp_window;
+			((struct buffer_descriptor *)temp_window)->v = value;
+			((struct buffer_descriptor *)temp_window)->ready = 1;
 			//printf("HELLO\n");
 		}
+		free(bd);
 	}
 
 }
