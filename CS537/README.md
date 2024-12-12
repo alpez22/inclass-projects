@@ -1,1 +1,1 @@
-CS537 - Introduction to Operating Systems is an advanced computer science course at UW-Madison under the software and hardware computer science umbrella. Within this folder I have several coding projects in C that I completed individually. I am currently enrolled in this course.
+CS537 - Introduction to Operating Systems is an advanced computer science course at UW-Madison under the software and hardware computer science umbrella. Within this folder I have several coding projects in C that I completed individually.
