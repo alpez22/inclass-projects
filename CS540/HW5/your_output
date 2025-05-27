@@ -1,0 +1,25 @@
+Q2:
+[[0.  1. ]
+ [0.5 1. ]
+ [1.  1. ]]
+Q3:
+[-21.         135.16666667]
+Q4a:
+[0. 0.]
+[30.70107492 74.43550295]
+[32.77049906 96.45819629]
+[ 28.31457658 104.86927867]
+[ 22.82179505 109.499432  ]
+[ 17.6015202  112.86972697]
+[ 12.91861334 115.65321437]
+[  8.7825806  118.05246758]
+[  5.14554887 120.14743019]
+[  1.95132189 121.98360183]
+Q4b: 0.1
+Q4c: 100
+Q4d: In order to get a good learning weight, The final parameters w and b must reach values that are close to the closed‐form solution which is within a small tolerance like 0.01. I started with a low learning rate and gradually increased it until the gradient descent converged within 500 iterations. I observed that having too high of a rate caused divergence, which I found was around 1.6, and settled on a rate that converged within 500 iterations to weights near the closed-form values. The range I found that still converged was 0.27 through 1.5.
+Q5: -2206.3333333333335
+Q6a: <
+Q6b: w > 0 suggests that ice days increase over time, w < 0 indicates they decrease over time, and w = 0 shows no change in ice days with time.
+Q7a: 1812.873015873016
+Q7b: This estimate relies on a simple linear approach that may not capture nonlinear climate effects or other external influences. Extrapolating beyond the data can lead to unreliable results and could overlook factors like climate change or other variables.
