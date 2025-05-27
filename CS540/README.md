@@ -1,0 +1,1 @@
+CS540 - Introduction to Artificial Intelligence is an advanced computer science course at UW-Madison under the applications in computer science umbrella. Within this folder I have several coding projects in Python that I completed individually.
